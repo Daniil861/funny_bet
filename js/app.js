@@ -382,6 +382,10 @@
             sessionStorage.setItem("preloader", true);
             preloader.classList.add("_hide");
             wrapper.classList.add("_visible");
+            if (document.querySelector(".main__body") && document.querySelector(".preloader").classList.contains("_hide")) {
+                document.querySelector(".wrapper__bacgrounds").classList.add("_active");
+                document.querySelector(".main").classList.add("_active");
+            }
         }
         if (targetElement.closest(".item-shop__button-buy_double")) if (+sessionStorage.getItem("money") >= 1e3) {
             delete_money(1e3, ".check");
