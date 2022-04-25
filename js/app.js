@@ -249,6 +249,9 @@
             targetElement.dataset.value = "empty";
             sessionStorage.setItem("correctly-items", +sessionStorage.getItem("correctly-items") - 1);
             add_money(50, ".check", 1500, 2500);
+            setTimeout((() => {
+                create_pin(targetElement);
+            }), 1e3);
             check_win();
         }
     }
@@ -334,6 +337,14 @@
         if ("ease" == sessionStorage.getItem("current-level")) sessionStorage.setItem("current-x", 4); else if ("normal" == sessionStorage.getItem("current-level")) sessionStorage.setItem("current-x", 6); else if ("hard" == sessionStorage.getItem("current-level")) sessionStorage.setItem("current-x", 8);
         document.querySelector(".field-game__multiple p").textContent = `x${sessionStorage.getItem("current-x")}`;
     }
+    function create_pin(block) {
+        let item = document.createElement("div");
+        item.classList.add("wires__pin");
+        let image = document.createElement("img");
+        image.setAttribute("src", "img/icons/check-mark.svg");
+        item.append(image);
+        block.append(item);
+    }
     document.addEventListener("click", (e => {
         let targetElement = e.target;
         if (targetElement.closest(".preloader__button")) {
@@ -394,6 +405,7 @@
             add_remove_className(".footer-game__bonuses", "_hold");
             remove_class(".wires__wire", "_hide");
             add_remove_className(".wires", "_hold");
+            if (document.querySelector(".wires__pin")) document.querySelectorAll(".wires__pin").forEach((el => el.remove()));
         }
         if (targetElement.closest(".footer-game__button-bet")) {
             document.querySelector(".wires").classList.remove("_hold");
