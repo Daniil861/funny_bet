@@ -123,6 +123,27 @@ body._hold {
 .wrapper._visible {
   display: flex;
 }
+.wrapper__bacgrounds._active .wrapper__logo {
+  animation: show_page_y_logo 0.7s ease 0.6s forwards;
+}
+.wrapper__bacgrounds._active .wrapper__clipper {
+  animation: show_page_x 0.7s ease 0.6s forwards;
+}
+.wrapper__bacgrounds._active .wrapper__lines {
+  animation: show_page_x 0.7s ease 0.6s forwards;
+}
+.wrapper__logo {
+  transform: translateY(-10%);
+  opacity: 0;
+}
+.wrapper__clipper {
+  transform: translateX(-10%);
+  opacity: 0;
+}
+.wrapper__lines {
+  transform: translateX(10%);
+  opacity: 0;
+}
 
 [class*=-ibg] {
   position: relative;
@@ -273,7 +294,7 @@ body._hold {
   position: absolute;
   top: 1.875rem;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -30%);
   width: 14.875rem;
   height: 4.4375rem;
   display: flex;
@@ -428,6 +449,12 @@ body._hold {
   margin-right: -20px;
 }
 
+.main._active .main__buttons {
+  animation: show_page_y 0.7s ease 1s forwards;
+}
+.main._active .main__shop-block {
+  animation: show_item 0.7s ease 1.4s forwards;
+}
 .main__body {
   display: flex;
   justify-content: center;
@@ -439,6 +466,8 @@ body._hold {
   display: flex;
   flex-direction: column;
   row-gap: 2.1875rem;
+  transform: translateY(20%);
+  opacity: 0;
 }
 .main__button {
   background: #c71616;
@@ -465,6 +494,7 @@ body._hold {
   transform: translateX(-50%);
   width: 100%;
   padding: 0rem 0.625rem;
+  opacity: 0;
 }
 .main__shop-button {
   margin: 0 0 0.625rem 0;
@@ -478,12 +508,28 @@ body._hold {
   flex-direction: column;
   min-height: 100vh;
 }
+.shop__body._active .item-shop {
+  animation: show_page_x 0.7s ease 1.2s forwards;
+}
+.shop__body._active .shop__header {
+  animation: show_page_y 0.7s ease 0.6s forwards;
+}
+.shop__body._active .shop__label {
+  animation: show_page_x 0.7s ease 0.6s forwards;
+}
+.shop__body._active .shop__bank {
+  animation: show_page_y 0.7s ease 0.6s forwards;
+}
 .shop__header {
   margin: 1.5625rem 0 2.1875rem;
+  transform: translateY(-10%);
+  opacity: 0;
 }
 .shop__label {
   margin-bottom: 0.9375rem;
   width: 100%;
+  opacity: 0;
+  transform: translateX(-10%);
 }
 .shop__label:active {
   transform: translateY(0px);
@@ -494,12 +540,15 @@ body._hold {
 }
 .shop__bank {
   margin-bottom: 0.9375rem;
+  opacity: 0;
 }
 
 .item-shop {
   background: #c71616;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+  transform: translateX(-10%);
+  opacity: 0;
 }
 .item-shop__body {
   display: flex;
@@ -593,22 +642,61 @@ body._hold {
   display: flex;
   flex-direction: column;
 }
+.game__body._active .footer-game {
+  animation: show_page_y 0.7s ease 0.6s forwards;
+}
+.game__body._active .game__header {
+  animation: show_page_y 0.7s ease 0.6s forwards;
+}
+.game__body._active .game__field {
+  animation: show_page_x 0.7s ease 1s forwards;
+}
 .game__header {
   margin: 1.5rem 0 3.125rem;
+  transform: translateY(-10%);
+  opacity: 0;
 }
 .game__field {
   flex: 1 1 auto;
+  transform: translateX(-10%);
+  opacity: 0;
 }
 .game__footer {
   margin-bottom: 0.9375rem;
+  transform: translateY(10%);
+  opacity: 0;
 }
 
 .footer-game__button-bet {
   width: 100%;
+}
+.footer-game__buttons {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 0.5rem;
+  column-gap: 0.375rem;
+}
+.footer-game__buttons._hold {
+  opacity: 0.5;
+  pointer-events: none;
 }
 .footer-game__block-bet {
   margin-bottom: 1.6875rem;
+  height: 2.625rem;
+}
+.footer-game__button-random {
+  height: 2.625rem;
+  background: #800000;
+}
+.footer-game__button-random._hide {
+  display: none;
+}
+.footer-game__button-random p {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.4583333333;
+  color: #fff;
+  text-transform: uppercase;
 }
 .footer-game__bonuses {
   display: flex;
@@ -982,5 +1070,31 @@ body._hold {
 @keyframes prompt_wire {
   100% {
     opacity: 0.3;
+  }
+}
+@keyframes show_page_y {
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes show_page_y_logo {
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+@keyframes show_page_x {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes show_item {
+  100% {
+    opacity: 1;
   }
 }
