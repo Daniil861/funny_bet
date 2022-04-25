@@ -239,6 +239,9 @@
         }), 2300);
     }
     function check_game_over(targetElement) {
+        setTimeout((() => {
+            create_line(targetElement);
+        }), 1500);
         if ("bang" == targetElement.dataset.value) {
             create__remove_bang();
             bang_clipper();
@@ -251,7 +254,7 @@
             add_money(50, ".check", 1500, 2500);
             setTimeout((() => {
                 create_pin(targetElement);
-            }), 1e3);
+            }), 1500);
             check_win();
         }
     }
@@ -262,7 +265,7 @@
             document.querySelector(".win__text").textContent = win_count;
             setTimeout((() => {
                 document.querySelector(".win").classList.add("_active");
-            }), 1500);
+            }), 2e3);
         }
     }
     function bang_clipper() {
@@ -341,9 +344,23 @@
         let item = document.createElement("div");
         item.classList.add("wires__pin");
         let image = document.createElement("img");
-        image.setAttribute("src", "img/icons/check-mark.svg");
+        image.setAttribute("src", "img/icons/check-mark.png");
         item.append(image);
         block.append(item);
+    }
+    function create_line(block) {
+        let item = document.createElement("div");
+        item.classList.add("wires__line");
+        let image = document.createElement("img");
+        image.setAttribute("src", "img/icons/pin.jpg");
+        item.append(image);
+        block.append(item);
+    }
+    function check_current_bet() {
+        if (+sessionStorage.getItem("current-bet") > +sessionStorage.getItem("money")) {
+            sessionStorage.setItem("current-bet", 0);
+            document.querySelector(".block-bet__coins").textContent = sessionStorage.getItem("current-bet");
+        }
     }
     document.addEventListener("click", (e => {
         let targetElement = e.target;
@@ -405,7 +422,9 @@
             add_remove_className(".footer-game__bonuses", "_hold");
             remove_class(".wires__wire", "_hide");
             add_remove_className(".wires", "_hold");
+            check_current_bet();
             if (document.querySelector(".wires__pin")) document.querySelectorAll(".wires__pin").forEach((el => el.remove()));
+            if (document.querySelector(".wires__line")) document.querySelectorAll(".wires__line").forEach((el => el.remove()));
         }
         if (targetElement.closest(".footer-game__button-bet")) {
             document.querySelector(".wires").classList.remove("_hold");
