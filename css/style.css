@@ -619,6 +619,9 @@ body._hold {
   pointer-events: none;
   opacity: 0.3;
 }
+.footer-game__bonuses._not-active {
+  pointer-events: none;
+}
 .field-game {
   display: flex;
   align-items: flex-end;
