@@ -124,13 +124,13 @@ body._hold {
   display: flex;
 }
 .wrapper__bacgrounds._active .wrapper__logo {
-  animation: show_page_y_logo 0.7s ease 0.6s forwards;
+  animation: show_page_y_logo 0.7s ease 0.3s forwards;
 }
 .wrapper__bacgrounds._active .wrapper__clipper {
-  animation: show_page_x 0.7s ease 0.6s forwards;
+  animation: show_page_x 0.7s ease 0.3s forwards;
 }
 .wrapper__bacgrounds._active .wrapper__lines {
-  animation: show_page_x 0.7s ease 0.6s forwards;
+  animation: show_page_x 0.7s ease 0.3s forwards;
 }
 .wrapper__logo {
   transform: translateY(-10%);
@@ -450,10 +450,10 @@ body._hold {
 }
 
 .main._active .main__buttons {
-  animation: show_page_y 0.7s ease 1s forwards;
+  animation: show_page_y 0.7s ease 0.6s forwards;
 }
 .main._active .main__shop-block {
-  animation: show_item 0.7s ease 1.4s forwards;
+  animation: show_item 0.7s ease 1s forwards;
 }
 .main__body {
   display: flex;
