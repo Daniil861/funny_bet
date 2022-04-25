@@ -712,6 +712,14 @@ body._hold {
 .wires._hold {
   pointer-events: none;
 }
+.wires__pin {
+  position: absolute;
+  top: -3.125rem;
+  left: -5px;
+  width: 1.25rem;
+  z-index: 2;
+  transition: all 0.5s ease 0s;
+}
 .wires__wire {
   width: 0.5625rem;
   height: 9.375rem;
