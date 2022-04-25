@@ -381,6 +381,7 @@
                 add_remove_className(".wires", "_hold");
             }), 2e3);
             remove_class(".wires__wire", "_prompt");
+            add_remove_className(".footer-game__bonuses", "_not-active");
         }
         if (targetElement.closest(".loose__button_play") || targetElement.closest(".win__button_play")) {
             create_start_game();
@@ -401,9 +402,23 @@
             add_remove_className(".footer-game__button-bet", "_hold");
             add_remove_className(".footer-game__bonuses", "_hold");
         }
-        if (targetElement.closest(".box-bonus_1") && document.querySelector(".game")) get_x2_bonus();
-        if (targetElement.closest(".box-bonus_2") && document.querySelector(".game")) get_half_bonus();
-        if (targetElement.closest(".box-bonus_3") && document.querySelector(".game")) get_rest_wires();
+        if (targetElement.closest(".box-bonus_1") && document.querySelector(".game") && +sessionStorage.getItem("bonus-1") > 0) {
+            get_x2_bonus();
+            setTimeout((() => {
+                add_remove_className(".footer-game__bonuses", "_not-active");
+            }), 1e3);
+        }
+        if (targetElement.closest(".box-bonus_2") && document.querySelector(".game") && +sessionStorage.getItem("bonus-2") > 0) {
+            get_half_bonus();
+            add_remove_className(".footer-game__bonuses", "_not-active");
+        }
+        if (targetElement.closest(".box-bonus_3") && document.querySelector(".game") && +sessionStorage.getItem("bonus-3") > 0) {
+            get_rest_wires();
+            add_remove_className(".footer-game__bonuses", "_not-active");
+            setTimeout((() => {
+                add_remove_className(".footer-game__bonuses", "_not-active");
+            }), 1e3);
+        }
     }));
     window["FLS"] = true;
     isWebp();
