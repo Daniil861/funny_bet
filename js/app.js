@@ -87,7 +87,12 @@
     if (document.querySelector(".bank__body img")) setInterval((() => {
         get_random_animate();
     }), 2e4);
+    if (document.querySelector(".main__body") && document.querySelector(".preloader").classList.contains("_hide")) {
+        document.querySelector(".wrapper__bacgrounds").classList.add("_active");
+        document.querySelector(".main").classList.add("_active");
+    }
     if (document.querySelector(".shop")) {
+        document.querySelector(".shop__body").classList.add("_active");
         if (sessionStorage.getItem("bonus-1")) document.querySelector(".box-bonus__count_1").textContent = sessionStorage.getItem("bonus-1"); else document.querySelector(".box-bonus__count_1").textContent = 0;
         if (sessionStorage.getItem("bonus-2")) document.querySelector(".box-bonus__count_2").textContent = sessionStorage.getItem("bonus-2"); else document.querySelector(".box-bonus__count_2").textContent = 0;
         if (sessionStorage.getItem("bonus-3")) document.querySelector(".box-bonus__count_3").textContent = sessionStorage.getItem("bonus-3"); else document.querySelector(".box-bonus__count_3").textContent = 0;
@@ -106,6 +111,7 @@
     let arr_game = [];
     let arr_current_level = [];
     if (document.querySelector(".game")) {
+        document.querySelector(".game__body").classList.add("_active");
         sessionStorage.setItem("current-bet", 50);
         document.querySelector(".block-bet__coins").textContent = sessionStorage.getItem("current-bet");
         document.querySelector(".header__text").textContent = sessionStorage.getItem("current-level");
@@ -120,9 +126,11 @@
             create_wires_normal();
             arr_game = [ "correctly", "correctly", "correctly", "bang", "bang", "bang", "neutral", "neutral" ];
             sessionStorage.setItem("current-x", 6);
+            document.querySelector(".footer-game__button-random").classList.remove("_hide");
         } else if ("hard" == sessionStorage.getItem("current-level")) {
             create_wires_hard();
             arr_game = [ "correctly", "correctly", "correctly", "correctly", "bang", "bang", "bang", "bang" ];
+            document.querySelector(".footer-game__button-random").classList.remove("_hide");
             sessionStorage.setItem("current-x", 8);
         }
         document.querySelector(".field-game__multiple p").textContent = `x${sessionStorage.getItem("current-x")}`;
@@ -362,6 +370,12 @@
             document.querySelector(".block-bet__coins").textContent = sessionStorage.getItem("current-bet");
         }
     }
+    function get_random_bet() {
+        let num = get_random(0, +sessionStorage.getItem("money"));
+        let num1 = 50 * Math.ceil(num / 50);
+        sessionStorage.setItem("current-bet", num1);
+        document.querySelector(".block-bet__coins").textContent = sessionStorage.getItem("current-bet");
+    }
     document.addEventListener("click", (e => {
         let targetElement = e.target;
         if (targetElement.closest(".preloader__button")) {
@@ -418,7 +432,7 @@
             document.querySelectorAll(".wires__wire").forEach((el => el.classList.remove("_active")));
             document.querySelector(".field-game__clipper").classList.remove("_bang");
             add_remove_className(".block-bet", "_hold");
-            add_remove_className(".footer-game__button-bet", "_hold");
+            add_remove_className(".footer-game__buttons", "_hold");
             add_remove_className(".footer-game__bonuses", "_hold");
             remove_class(".wires__wire", "_hide");
             add_remove_className(".wires", "_hold");
@@ -430,7 +444,7 @@
             document.querySelector(".wires").classList.remove("_hold");
             delete_money(+sessionStorage.getItem("current-bet"), ".check");
             add_remove_className(".block-bet", "_hold");
-            add_remove_className(".footer-game__button-bet", "_hold");
+            add_remove_className(".footer-game__buttons", "_hold");
             add_remove_className(".footer-game__bonuses", "_hold");
         }
         if (targetElement.closest(".box-bonus_1") && document.querySelector(".game") && +sessionStorage.getItem("bonus-1") > 0) {
@@ -449,6 +463,14 @@
             setTimeout((() => {
                 add_remove_className(".footer-game__bonuses", "_not-active");
             }), 1e3);
+        }
+        if (targetElement.closest(".footer-game__button-random") && !document.querySelector(".footer-game__button-random").classList.contains("_hide")) {
+            get_random_bet();
+            document.querySelector(".wires").classList.remove("_hold");
+            delete_money(+sessionStorage.getItem("current-bet"), ".check");
+            add_remove_className(".block-bet", "_hold");
+            add_remove_className(".footer-game__buttons", "_hold");
+            add_remove_className(".footer-game__bonuses", "_hold");
         }
     }));
     window["FLS"] = true;
